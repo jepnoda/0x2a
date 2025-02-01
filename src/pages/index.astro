@@ -1,13 +1,21 @@
 ---
+import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
+
+const posts = await getCollection('post')
 ---
 
 <Layout title="0x2A">
-  <p>
-    <q>
-      42: the answer to the ultimate question of life, the universe, and
-      everything.
-    </q>
-    <i>— Douglas Adams, The Hitchhiker's Guide to the Galaxy</i>
-  </p>
+  <main>
+    <p>
+      <q>
+        42: the answer to the ultimate question of life, the universe, and
+        everything.
+      </q>
+      <i>— Douglas Adams, The Hitchhiker's Guide to the Galaxy</i>
+    </p>
+    <ul>
+      {posts.map(({ data, id }) => <li><a href=`posts/${id}`>{data.title}</a></li>)}
+    </ul>
+  </main>
 </Layout>
